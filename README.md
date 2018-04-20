@@ -1,6 +1,6 @@
 # :rocket: wepy-nba
 
-![NBA](./src/assets/images/wx.gif)
+![NBA](./src/assets/wx.gif)
 
 ```js
 //全局安装或更新WePY命令行工具
