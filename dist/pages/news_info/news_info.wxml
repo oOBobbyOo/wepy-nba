@@ -1,0 +1,24 @@
+
+  <view>
+    <view class="article"  wx:if="{{item.length !=0}}">
+      <view class="title">
+          {{item.title}}
+          <view class="ptime">{{item.ptime}}</view>
+      </view>
+      <view class="wxParse"/>
+    </view>
+    <view class="comment-wrap"  wx:if="{{comments.length !=0}}">
+    <view class="title">评论</view>
+    <view class="comment-item" wx:for="{{comments}}" wx:for-item="comments" wx:key="key">
+        <view class="left">
+            <image src="{{comments.user.avatar}}"/>
+        </view>
+        <view class="right">
+            <view class="user-name">{{comments.user.nickname}}</view>
+            <view class="time">{{comments.createTime}} </view>
+            <view class="content">{{comments.content}}</view>
+            <view class="address">{{comments.user.location}} {{comments.ip}}</view>
+        </view>
+    </view>
+</view>
+  </view>

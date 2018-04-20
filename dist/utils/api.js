@@ -1,0 +1,122 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.website = exports.player_top = exports.team_schedule = exports.news_list = exports.news_comments = exports.news_info = exports.Lineup = exports.team_info = exports.team_rank = exports.player_detail = exports.technical_statistics = exports.live_content = exports.live_detail = exports.nab_schedule = undefined;
+
+var _fetch = require('./fetch.js');
+
+var _fetch2 = _interopRequireDefault(_fetch);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var API_DOMAIN = 'https://wapapi.it919.cn/?service=';
+
+/*
+ * @param  {String} api 接口地址
+ * @param  {Objece} params 接口参数参数
+ */
+function fetchApi(api, params) {
+  return (0, _fetch2.default)(API_DOMAIN, api, params);
+}
+// NBA比赛直播
+function nab_schedule(params) {
+  return fetchApi('Nba.schedule', params).then(function (res) {
+    return res;
+  });
+}
+// 直播室信息
+function live_detail(params) {
+  return fetchApi('Nba.live_detail', params).then(function (res) {
+    return res;
+  });
+}
+// 直播内容
+function live_content(params) {
+  return fetchApi('Nba.live_content', params).then(function (res) {
+    return res;
+  });
+}
+// 球员技术统计
+function technical_statistics(params) {
+  return fetchApi('Nba.technical_statistics', params).then(function (res) {
+    return res;
+  });
+}
+// 球员详情
+function player_detail(params) {
+  return fetchApi('Nba.player_detail', params).then(function (res) {
+    return res;
+  });
+}
+// 联盟排名
+function team_rank(params) {
+  return fetchApi('Nba.team_rank', params).then(function (res) {
+    return res;
+  });
+}
+// 球队信息
+function team_info(params) {
+  return fetchApi('Nba.team_info', params).then(function (res) {
+    return res;
+  });
+}
+// 球队赛程
+function team_schedule(params) {
+  return fetchApi('Nba.team_schedule', params).then(function (res) {
+    return res;
+  });
+}
+// 球队阵容
+function Lineup(params) {
+  return fetchApi('Nba.Lineup', params).then(function (res) {
+    return res;
+  });
+}
+// 新闻详情
+function news_info(params) {
+  return fetchApi('Nba.news_info', params).then(function (res) {
+    return res;
+  });
+}
+// NBA 新闻快讯
+function news_list(params) {
+  return fetchApi('Nba.new_list', params).then(function (res) {
+    return res;
+  });
+}
+// NBA新闻评论
+function news_comments(params) {
+  return fetchApi('Nba.news_comments', params).then(function (res) {
+    return res;
+  });
+}
+// 球员数据排行榜
+function player_top(params) {
+  return fetchApi('Nba.player_top', params).then(function (res) {
+    return res;
+  });
+}
+// 关于我
+function website(params) {
+  return fetchApi('Nba.website', params).then(function (res) {
+    return res;
+  });
+}
+
+exports.nab_schedule = nab_schedule;
+exports.live_detail = live_detail;
+exports.live_content = live_content;
+exports.technical_statistics = technical_statistics;
+exports.player_detail = player_detail;
+exports.team_rank = team_rank;
+exports.team_info = team_info;
+exports.Lineup = Lineup;
+exports.news_info = news_info;
+exports.news_comments = news_comments;
+exports.news_list = news_list;
+exports.team_schedule = team_schedule;
+exports.player_top = player_top;
+exports.website = website;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwaS5qcyJdLCJuYW1lcyI6WyJBUElfRE9NQUlOIiwiZmV0Y2hBcGkiLCJhcGkiLCJwYXJhbXMiLCJuYWJfc2NoZWR1bGUiLCJ0aGVuIiwicmVzIiwibGl2ZV9kZXRhaWwiLCJsaXZlX2NvbnRlbnQiLCJ0ZWNobmljYWxfc3RhdGlzdGljcyIsInBsYXllcl9kZXRhaWwiLCJ0ZWFtX3JhbmsiLCJ0ZWFtX2luZm8iLCJ0ZWFtX3NjaGVkdWxlIiwiTGluZXVwIiwibmV3c19pbmZvIiwibmV3c19saXN0IiwibmV3c19jb21tZW50cyIsInBsYXllcl90b3AiLCJ3ZWJzaXRlIl0sIm1hcHBpbmdzIjoiOzs7Ozs7O0FBQUE7Ozs7OztBQUNBLElBQU1BLGFBQWEsbUNBQW5COztBQUVBOzs7O0FBSUEsU0FBU0MsUUFBVCxDQUFrQkMsR0FBbEIsRUFBdUJDLE1BQXZCLEVBQStCO0FBQzdCLFNBQU8scUJBQU1ILFVBQU4sRUFBa0JFLEdBQWxCLEVBQXVCQyxNQUF2QixDQUFQO0FBQ0Q7QUFDRDtBQUNBLFNBQVNDLFlBQVQsQ0FBc0JELE1BQXRCLEVBQThCO0FBQzVCLFNBQU9GLFNBQVMsY0FBVCxFQUF5QkUsTUFBekIsRUFBaUNFLElBQWpDLENBQXNDO0FBQUEsV0FBT0MsR0FBUDtBQUFBLEdBQXRDLENBQVA7QUFDRDtBQUNEO0FBQ0EsU0FBU0MsV0FBVCxDQUFxQkosTUFBckIsRUFBNkI7QUFDM0IsU0FBT0YsU0FBUyxpQkFBVCxFQUE0QkUsTUFBNUIsRUFBb0NFLElBQXBDLENBQXlDO0FBQUEsV0FBT0MsR0FBUDtBQUFBLEdBQXpDLENBQVA7QUFDRDtBQUNEO0FBQ0EsU0FBU0UsWUFBVCxDQUFzQkwsTUFBdEIsRUFBOEI7QUFDNUIsU0FBT0YsU0FBUyxrQkFBVCxFQUE2QkUsTUFBN0IsRUFBcUNFLElBQXJDLENBQTBDO0FBQUEsV0FBT0MsR0FBUDtBQUFBLEdBQTFDLENBQVA7QUFDRDtBQUNEO0FBQ0EsU0FBU0csb0JBQVQsQ0FBOEJOLE1BQTlCLEVBQXNDO0FBQ3BDLFNBQU9GLFNBQVMsMEJBQVQsRUFBcUNFLE1BQXJDLEVBQTZDRSxJQUE3QyxDQUFrRDtBQUFBLFdBQU9DLEdBQVA7QUFBQSxHQUFsRCxDQUFQO0FBQ0Q7QUFDRDtBQUNBLFNBQVNJLGFBQVQsQ0FBdUJQLE1BQXZCLEVBQStCO0FBQzdCLFNBQU9GLFNBQVMsbUJBQVQsRUFBOEJFLE1BQTlCLEVBQXNDRSxJQUF0QyxDQUEyQztBQUFBLFdBQU9DLEdBQVA7QUFBQSxHQUEzQyxDQUFQO0FBQ0Q7QUFDRDtBQUNBLFNBQVNLLFNBQVQsQ0FBbUJSLE1BQW5CLEVBQTJCO0FBQ3pCLFNBQU9GLFNBQVMsZUFBVCxFQUEwQkUsTUFBMUIsRUFBa0NFLElBQWxDLENBQXVDO0FBQUEsV0FBT0MsR0FBUDtBQUFBLEdBQXZDLENBQVA7QUFDRDtBQUNEO0FBQ0EsU0FBU00sU0FBVCxDQUFtQlQsTUFBbkIsRUFBMkI7QUFDekIsU0FBT0YsU0FBUyxlQUFULEVBQTBCRSxNQUExQixFQUFrQ0UsSUFBbEMsQ0FBdUM7QUFBQSxXQUFPQyxHQUFQO0FBQUEsR0FBdkMsQ0FBUDtBQUNEO0FBQ0Q7QUFDQSxTQUFTTyxhQUFULENBQXVCVixNQUF2QixFQUErQjtBQUM3QixTQUFPRixTQUFTLG1CQUFULEVBQThCRSxNQUE5QixFQUFzQ0UsSUFBdEMsQ0FBMkM7QUFBQSxXQUFPQyxHQUFQO0FBQUEsR0FBM0MsQ0FBUDtBQUNEO0FBQ0Q7QUFDQSxTQUFTUSxNQUFULENBQWdCWCxNQUFoQixFQUF3QjtBQUN0QixTQUFPRixTQUFTLFlBQVQsRUFBdUJFLE1BQXZCLEVBQStCRSxJQUEvQixDQUFvQztBQUFBLFdBQU9DLEdBQVA7QUFBQSxHQUFwQyxDQUFQO0FBQ0Q7QUFDRDtBQUNBLFNBQVNTLFNBQVQsQ0FBbUJaLE1BQW5CLEVBQTJCO0FBQ3pCLFNBQU9GLFNBQVMsZUFBVCxFQUEwQkUsTUFBMUIsRUFBa0NFLElBQWxDLENBQXVDO0FBQUEsV0FBT0MsR0FBUDtBQUFBLEdBQXZDLENBQVA7QUFDRDtBQUNEO0FBQ0EsU0FBU1UsU0FBVCxDQUFtQmIsTUFBbkIsRUFBMkI7QUFDekIsU0FBT0YsU0FBUyxjQUFULEVBQXlCRSxNQUF6QixFQUFpQ0UsSUFBakMsQ0FBc0M7QUFBQSxXQUFPQyxHQUFQO0FBQUEsR0FBdEMsQ0FBUDtBQUNEO0FBQ0Q7QUFDQSxTQUFTVyxhQUFULENBQXVCZCxNQUF2QixFQUErQjtBQUM3QixTQUFPRixTQUFTLG1CQUFULEVBQThCRSxNQUE5QixFQUFzQ0UsSUFBdEMsQ0FBMkM7QUFBQSxXQUFPQyxHQUFQO0FBQUEsR0FBM0MsQ0FBUDtBQUNEO0FBQ0Q7QUFDQSxTQUFTWSxVQUFULENBQW9CZixNQUFwQixFQUE0QjtBQUMxQixTQUFPRixTQUFTLGdCQUFULEVBQTJCRSxNQUEzQixFQUFtQ0UsSUFBbkMsQ0FBd0M7QUFBQSxXQUFPQyxHQUFQO0FBQUEsR0FBeEMsQ0FBUDtBQUNEO0FBQ0Q7QUFDQSxTQUFTYSxPQUFULENBQWlCaEIsTUFBakIsRUFBeUI7QUFDdkIsU0FBT0YsU0FBUyxhQUFULEVBQXdCRSxNQUF4QixFQUFnQ0UsSUFBaEMsQ0FBcUM7QUFBQSxXQUFPQyxHQUFQO0FBQUEsR0FBckMsQ0FBUDtBQUNEOztRQUdDRixZLEdBQUFBLFk7UUFDQUcsVyxHQUFBQSxXO1FBQ0FDLFksR0FBQUEsWTtRQUNBQyxvQixHQUFBQSxvQjtRQUNBQyxhLEdBQUFBLGE7UUFDQUMsUyxHQUFBQSxTO1FBQ0FDLFMsR0FBQUEsUztRQUNBRSxNLEdBQUFBLE07UUFDQUMsUyxHQUFBQSxTO1FBQ0FFLGEsR0FBQUEsYTtRQUNBRCxTLEdBQUFBLFM7UUFDQUgsYSxHQUFBQSxhO1FBQ0FLLFUsR0FBQUEsVTtRQUNBQyxPLEdBQUFBLE8iLCJmaWxlIjoiYXBpLmpzIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IGZldGNoIGZyb20gJy4vZmV0Y2gnO1xyXG5jb25zdCBBUElfRE9NQUlOID0gJ2h0dHBzOi8vd2FwYXBpLml0OTE5LmNuLz9zZXJ2aWNlPSc7XHJcblxyXG4vKlxyXG4gKiBAcGFyYW0gIHtTdHJpbmd9IGFwaSDmjqXlj6PlnLDlnYBcclxuICogQHBhcmFtICB7T2JqZWNlfSBwYXJhbXMg5o6l5Y+j5Y+C5pWw5Y+C5pWwXHJcbiAqL1xyXG5mdW5jdGlvbiBmZXRjaEFwaShhcGksIHBhcmFtcykge1xyXG4gIHJldHVybiBmZXRjaChBUElfRE9NQUlOLCBhcGksIHBhcmFtcyk7XHJcbn1cclxuLy8gTkJB5q+U6LWb55u05pKtXHJcbmZ1bmN0aW9uIG5hYl9zY2hlZHVsZShwYXJhbXMpIHtcclxuICByZXR1cm4gZmV0Y2hBcGkoJ05iYS5zY2hlZHVsZScsIHBhcmFtcykudGhlbihyZXMgPT4gcmVzKTtcclxufVxyXG4vLyDnm7Tmkq3lrqTkv6Hmga9cclxuZnVuY3Rpb24gbGl2ZV9kZXRhaWwocGFyYW1zKSB7XHJcbiAgcmV0dXJuIGZldGNoQXBpKCdOYmEubGl2ZV9kZXRhaWwnLCBwYXJhbXMpLnRoZW4ocmVzID0+IHJlcyk7XHJcbn1cclxuLy8g55u05pKt5YaF5a65XHJcbmZ1bmN0aW9uIGxpdmVfY29udGVudChwYXJhbXMpIHtcclxuICByZXR1cm4gZmV0Y2hBcGkoJ05iYS5saXZlX2NvbnRlbnQnLCBwYXJhbXMpLnRoZW4ocmVzID0+IHJlcyk7XHJcbn1cclxuLy8g55CD5ZGY5oqA5pyv57uf6K6hXHJcbmZ1bmN0aW9uIHRlY2huaWNhbF9zdGF0aXN0aWNzKHBhcmFtcykge1xyXG4gIHJldHVybiBmZXRjaEFwaSgnTmJhLnRlY2huaWNhbF9zdGF0aXN0aWNzJywgcGFyYW1zKS50aGVuKHJlcyA9PiByZXMpO1xyXG59XHJcbi8vIOeQg+WRmOivpuaDhVxyXG5mdW5jdGlvbiBwbGF5ZXJfZGV0YWlsKHBhcmFtcykge1xyXG4gIHJldHVybiBmZXRjaEFwaSgnTmJhLnBsYXllcl9kZXRhaWwnLCBwYXJhbXMpLnRoZW4ocmVzID0+IHJlcyk7XHJcbn1cclxuLy8g6IGU55uf5o6S5ZCNXHJcbmZ1bmN0aW9uIHRlYW1fcmFuayhwYXJhbXMpIHtcclxuICByZXR1cm4gZmV0Y2hBcGkoJ05iYS50ZWFtX3JhbmsnLCBwYXJhbXMpLnRoZW4ocmVzID0+IHJlcyk7XHJcbn1cclxuLy8g55CD6Zif5L+h5oGvXHJcbmZ1bmN0aW9uIHRlYW1faW5mbyhwYXJhbXMpIHtcclxuICByZXR1cm4gZmV0Y2hBcGkoJ05iYS50ZWFtX2luZm8nLCBwYXJhbXMpLnRoZW4ocmVzID0+IHJlcyk7XHJcbn1cclxuLy8g55CD6Zif6LWb56iLXHJcbmZ1bmN0aW9uIHRlYW1fc2NoZWR1bGUocGFyYW1zKSB7XHJcbiAgcmV0dXJuIGZldGNoQXBpKCdOYmEudGVhbV9zY2hlZHVsZScsIHBhcmFtcykudGhlbihyZXMgPT4gcmVzKTtcclxufVxyXG4vLyDnkIPpmJ/pmLXlrrlcclxuZnVuY3Rpb24gTGluZXVwKHBhcmFtcykge1xyXG4gIHJldHVybiBmZXRjaEFwaSgnTmJhLkxpbmV1cCcsIHBhcmFtcykudGhlbihyZXMgPT4gcmVzKTtcclxufVxyXG4vLyDmlrDpl7vor6bmg4VcclxuZnVuY3Rpb24gbmV3c19pbmZvKHBhcmFtcykge1xyXG4gIHJldHVybiBmZXRjaEFwaSgnTmJhLm5ld3NfaW5mbycsIHBhcmFtcykudGhlbihyZXMgPT4gcmVzKTtcclxufVxyXG4vLyBOQkEg5paw6Ze75b+r6K6vXHJcbmZ1bmN0aW9uIG5ld3NfbGlzdChwYXJhbXMpIHtcclxuICByZXR1cm4gZmV0Y2hBcGkoJ05iYS5uZXdfbGlzdCcsIHBhcmFtcykudGhlbihyZXMgPT4gcmVzKTtcclxufVxyXG4vLyBOQkHmlrDpl7vor4TorrpcclxuZnVuY3Rpb24gbmV3c19jb21tZW50cyhwYXJhbXMpIHtcclxuICByZXR1cm4gZmV0Y2hBcGkoJ05iYS5uZXdzX2NvbW1lbnRzJywgcGFyYW1zKS50aGVuKHJlcyA9PiByZXMpO1xyXG59XHJcbi8vIOeQg+WRmOaVsOaNruaOkuihjOamnFxyXG5mdW5jdGlvbiBwbGF5ZXJfdG9wKHBhcmFtcykge1xyXG4gIHJldHVybiBmZXRjaEFwaSgnTmJhLnBsYXllcl90b3AnLCBwYXJhbXMpLnRoZW4ocmVzID0+IHJlcyk7XHJcbn1cclxuLy8g5YWz5LqO5oiRXHJcbmZ1bmN0aW9uIHdlYnNpdGUocGFyYW1zKSB7XHJcbiAgcmV0dXJuIGZldGNoQXBpKCdOYmEud2Vic2l0ZScsIHBhcmFtcykudGhlbihyZXMgPT4gcmVzKTtcclxufVxyXG5cclxuZXhwb3J0IHtcclxuICBuYWJfc2NoZWR1bGUsXHJcbiAgbGl2ZV9kZXRhaWwsXHJcbiAgbGl2ZV9jb250ZW50LFxyXG4gIHRlY2huaWNhbF9zdGF0aXN0aWNzLFxyXG4gIHBsYXllcl9kZXRhaWwsXHJcbiAgdGVhbV9yYW5rLFxyXG4gIHRlYW1faW5mbyxcclxuICBMaW5ldXAsXHJcbiAgbmV3c19pbmZvLFxyXG4gIG5ld3NfY29tbWVudHMsXHJcbiAgbmV3c19saXN0LFxyXG4gIHRlYW1fc2NoZWR1bGUsXHJcbiAgcGxheWVyX3RvcCxcclxuICB3ZWJzaXRlXHJcbn07XHJcbiJdfQ==

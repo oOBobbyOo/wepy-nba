@@ -1,0 +1,77 @@
+<template>
+<view wx:if="{{item.length!=0}}">
+  <view class="stats-nav">
+    <text data-t="pt" class="{{current=='pt' ? 'active' : ''}}" data-name="篮板" @tap="tabNav">得分</text>
+    <text data-t="rb" class="{{current=='rb' ? 'active' : ''}}" data-name="篮板" @tap="tabNav">篮板</text>
+    <text data-t="at" class="{{current=='at' ? 'active' : ''}}" data-name="助攻" @tap="tabNav">助攻</text>
+    <text data-t="st" class="{{current=='st' ? 'active' : ''}}" data-name="抢断" @tap="tabNav">抢断</text>
+    <text data-t="bk" class="{{current=='bk' ? 'active' : ''}}" data-name="盖帽" @tap="tabNav">盖帽</text>
+    <text data-t="to" class="{{current=='to' ? 'active' : ''}}" data-name="失误" @tap="tabNav">失误</text>
+    <text class="{{current=='tp' ? 'active' : ''}}" data-t="tp" data-name="三分" @tap="tabNav">三分</text>
+    <text class="{{current=='fo' ? 'active' : ''}}" data-t="fo" data-name="犯规" @tap="tabNav">犯规</text>
+    <text class="{{current=='ftp' ? 'active' : ''}}" data-t="ftp" data-name="罚球" @tap="tabNav">罚球</text>
+    <text class="{{current=='sht' ? 'active' : ''}}" data-t="sht" data-name="神投" @tap="tabNav">神投</text>
+  </view>
+  <view class='table'>
+    <view class='header'>
+      <text>球员</text>
+      <text>场均{{name}}</text>
+      <text>总{{name}}</text>
+    </view>
+    <view class='tbody'>
+      <navigator wx:for="{{stats.record}}" wx:for-item="item" wx:key="index" url="/pages/player_detail/player_detail?id={{item.playerid}}" class="{{index%2 == 0 ? 'red' : 'f5f5f5'}}">
+        <text>{{index+1}}.{{item.playername}}</text>
+        <text>{{item.avgdata}}</text>
+        <text>{{item.totaldata}}</text>
+      </navigator>
+    </view>
+  </view>
+</view>
+</template>
+
+<script>
+import wepy from 'wepy';
+import { player_top } from '../../utils/api';
+
+export default class Stats extends wepy.page {
+  config = {
+    navigationBarTitleText: '数据统计'
+  };
+
+  data = {
+    item: [],
+    stats: [],
+    current: 'pt',
+    name: '得分'
+  };
+
+  methods = {
+    tabNav(e) {
+      let that = this;
+      that.stats = that.item[e.target.dataset.t];
+      that.current = e.target.dataset.t;
+      that.name = e.target.dataset.name;
+    }
+  };
+
+  async getPlayTop() {
+    let that = this;
+
+    const res = await player_top({});
+    // setData
+    that.item = res.data;
+    that.stats = res.data.pt;
+    that.$apply();
+  }
+
+  onLoad() {
+    this.getPlayTop();
+  }
+}
+</script>
+
+<style lang="less">
+@import './stats.less';
+</style>
+
+

@@ -1,0 +1,85 @@
+<template>
+  <view>
+    <view class='article' wx:if="{{item.length !=0}}">
+      <view class='title'>
+          {{item.title}}
+          <view class='ptime'>{{item.ptime}}</view>
+      </view>
+      <view class="wxParse"></view>
+    </view>
+    <view class='comment-wrap' wx:if="{{comments.length !=0}}">
+    <view class='title'>评论</view>
+    <view class='comment-item' wx:for="{{comments}}" wx:for-item="comments" wx:key="key">
+        <view class='left'>
+            <image src='{{comments.user.avatar}}' />
+        </view>
+        <view class='right'>
+            <view class='user-name'>{{comments.user.nickname}}</view>
+            <view class='time'>{{comments.createTime}} </view>
+            <view class='content'>{{comments.content}}</view>
+            <view class='address'>{{comments.user.location}} {{comments.ip}}</view>
+        </view>
+    </view>
+</view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+import { news_info, news_comments } from '../../utils/api';
+
+export default class News_list extends wepy.page {
+  config = {
+    navigationBarTitleText: 'NBA资讯'
+  };
+
+  data = {
+    docid: '',
+    item: [],
+    comments: []
+  };
+
+  methods = {};
+
+  async getNewsInfo(docid) {
+    let that = this;
+    let params = {
+      docid: docid
+    };
+    const res = await news_info(params);
+    // setData
+    that.item = res.data;
+
+    if (that.item && that.item.img.length !== 0) {
+      let replaceStr = '<img src=' + that.item.img[0]['src'] + '>';
+      that.item.body = that.item.body.replace('<!--IMG#0-->', replaceStr);
+      let regx = /<p>(.*?)<\/p>/g;
+      that.item.body = that.item.body.replace(regx, '<text>$1</text>');
+    }
+    that.$apply();
+  }
+
+  async getNewsComments(docid) {
+    let that = this;
+    let params = {
+      docid: docid
+    };
+    const res = await news_comments(params);
+    // setData
+    that.comments = res.data;
+    that.$apply();
+  }
+
+  onLoad(e) {
+    this.docid = e.docid || 'D230QPOC0005877U';
+    this.getNewsInfo(this.docid);
+    this.getNewsComments(this.docid);
+  }
+}
+</script>
+
+<style lang="less">
+@import './news_info.less';
+</style>
+
+

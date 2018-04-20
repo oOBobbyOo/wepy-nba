@@ -1,0 +1,166 @@
+<template>
+  <view>
+    <view class='a-head'>
+      <view class='left'>
+        <view class='name'>{{item.name}}</view>
+        <view class='job'>{{item.job}}</view>
+      </view>
+      <view class=" {{isPlay?'right Rotation':'right'}}">
+        <image src='{{item.icon}}' @tap='previewImage' data-url="{{item.icon}}" />
+      </view>
+    </view>
+    <view class='wrap'>
+      <view class='line'></view>
+      <view class='list-view icon-address' @tap='openMap'>{{item.address}}</view>
+      <view class='list-view icon-mail'>{{item.mail}}</view>
+      <view class='list-view icon-github'>{{item.github}}</view>
+      <view class='list-view icon-blog'>{{item.blog}}</view>
+    </view>
+    <view class='Motto'>
+      {{item.Motto}}
+    </view>
+    <view class='music-audio'>
+      <view class='poster left ' @tap='playMusic'>
+        <image src='{{item.music.poster}}' />
+        <view class="music-icon {{isPlay?'pause':'paly'}}"></view>
+      </view>
+      <view class='music-info left'>
+        <text class='music-title'>{{item.music.name}}</text>
+        <text class='right duration'>{{musicTime || "00:00"}}</text>
+      </view>
+      <view class='music-author left'>{{item.music.author}}</view>
+      <view class='progress left'>
+        <view class='currbar' style='width:{{playState.currentPosition*100 / playState.duration}}%'></view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+import { website } from '../../utils/api';
+
+export default class About extends wepy.page {
+  config = {
+    navigationBarTitleText: '关于我'
+  };
+
+  data = {
+    item: [],
+    isPlay: false,
+    playState: null,
+    currentPosition: 0,
+    duration: 0,
+    musicTime: '00:00',
+    timer: null
+  };
+
+  methods = {
+    previewImage(e) {
+      let url = e.target.dataset.url;
+      wx.previewImage({
+        current: url, // 当前显示图片的http链接
+        urls: [url] // 需要预览的图片http链接列表
+      });
+    },
+    openMap() {
+      wx.getLocation({
+        type: 'gcj02', // 默认为 wgs84 返回 gps 坐标，gcj02 返回可用于 wx.openLocation 的坐标
+        success: res => {
+          wx.openLocation({
+            latitude: 22.54999, // 纬度，范围为-90~90，负数表示南纬
+            longitude: 113.95066, // 经度，范围为-180~180，负数表示西经
+            scale: 28 // 缩放比例
+          });
+        }
+      });
+    },
+
+    playMusic() {
+      clearInterval(this.timer);
+      this.timer = null;
+      this.isPlay = !this.isPlay;
+      if (this.isPlay) {
+        // 播放音乐
+        wx.playBackgroundAudio({
+          dataUrl: this.item.music.src,
+          title: this.item.music.name,
+          coverImgUrl: this.item.music.poster
+        });
+        this.getTime();
+      } else {
+        // 暂停播放音乐
+        wx.pauseBackgroundAudio();
+      }
+    }
+  };
+
+  getTime() {
+    let that = this;
+    let timer = setInterval(function() {
+      // 获取后台音乐播放状态
+      wx.getBackgroundAudioPlayerState({
+        success: res => {
+          that.playState = res;
+          that.musicTime = that.secondToDate(res.duration);
+          that.$apply();
+        }
+      });
+    }, 300);
+
+    that.timer = timer;
+  }
+
+  secondToDate(result) {
+    let m = Math.floor((result / 60) % 60);
+    let s = Math.floor(result % 60);
+    if (s < 10) {
+      s = '0' + s;
+    }
+    return (result = m + ':' + s);
+  }
+
+  async getwebsite() {
+    let that = this;
+
+    const res = await website({});
+    // setData
+    that.item = res.data;
+    that.$apply();
+  }
+
+  onLoad() {
+    this.getwebsite();
+  }
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady() {
+    let that = this;
+    // 监听音乐播放
+    wx.onBackgroundAudioPlay(() => {
+      console.log('监听音乐播放');
+    });
+    // 监听音乐停止
+    wx.onBackgroundAudioStop(res => {
+      clearInterval(this.timer);
+      this.isPlay = false;
+      this.timer = null;
+      console.log('监听音乐停止', res);
+    });
+    // 监听音乐暂停
+    wx.onBackgroundAudioPause(res => {
+      clearInterval(this.timer);
+      this.isPlay = false;
+      this.timer = null;
+      console.log('监听音乐暂停', res);
+    });
+  }
+}
+</script>
+
+<style lang="less">
+@import './about.less';
+</style>
+
+

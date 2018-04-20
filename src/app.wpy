@@ -1,0 +1,221 @@
+<script>
+import wepy from 'wepy';
+import 'wepy-async-function';
+
+export default class extends wepy.app {
+  config = {
+    pages: [
+      'pages/index/index',
+      'pages/live_detail/live_detail',
+      'pages/news_list/news_list',
+      'pages/news_info/news_info',
+      'pages/team_rank/team_rank',
+      'pages/team_info/team_info',
+      'pages/stats/stats',
+      'pages/player_detail/player_detail',
+      'pages/about/about'
+    ],
+    window: {
+      backgroundTextStyle: 'light',
+      navigationBarBackgroundColor: '#00AA98',
+      navigationBarTitleText: 'NBA球赛',
+      navigationBarTextStyle: '#fff'
+    },
+    tabBar: {
+      color: '#333',
+      selectedColor: '#00aa98',
+      position: 'bottom',
+      borderStyle: 'block',
+      list: [
+        {
+          pagePath: 'pages/index/index',
+          text: '赛事直播',
+          iconPath: 'assets/images/ball.png',
+          selectedIconPath: 'assets/images/ball-active.png'
+        },
+        {
+          pagePath: 'pages/news_list/news_list',
+          text: 'NBA资讯',
+          iconPath: 'assets/images/news.png',
+          selectedIconPath: 'assets/images/news-active.png'
+        },
+        {
+          pagePath: 'pages/team_rank/team_rank',
+          text: '球队战绩',
+          iconPath: 'assets/images/rank.png',
+          selectedIconPath: 'assets/images/rank-active.png'
+        },
+        {
+          pagePath: 'pages/stats/stats',
+          text: '数据统计',
+          iconPath: 'assets/images/stats.png',
+          selectedIconPath: 'assets/images/stats-active.png'
+        },
+        {
+          pagePath: 'pages/about/about',
+          text: '关于我',
+          iconPath: 'assets/images/about.png',
+          selectedIconPath: 'assets/images/about-active.png'
+        }
+      ]
+    }
+  };
+
+  globalData = {
+    userInfo: null
+  };
+
+  constructor() {
+    super();
+    this.use('requestfix');
+    this.use('promisify');
+  }
+
+  onLaunch() {
+    this.testAsync();
+  }
+
+  sleep(s) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve('promise resolved');
+      }, s * 1000);
+    });
+  }
+
+  async testAsync() {
+    const data = await this.sleep(3);
+    console.log(data);
+  }
+
+  getUserInfo(cb) {
+    const that = this;
+    if (this.globalData.userInfo) {
+      return this.globalData.userInfo;
+    }
+    wepy.getUserInfo({
+      success(res) {
+        that.globalData.userInfo = res.userInfo;
+        cb && cb(res.userInfo);
+      }
+    });
+  }
+}
+</script>
+
+<style lang="less">
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.padding-lrtb-30 {
+  padding: 30rpx !important;
+}
+
+.padding-lr-30 {
+  padding: 0 30rpx !important;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.no-data {
+  padding: 100rpx 30rpx;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 28rpx;
+}
+
+.icon-nothing {
+  background: url(https://coding.it919.cn/static/images/no-data.png) center
+    no-repeat;
+  width: 120rpx;
+  height: 120rpx;
+  margin: 0 auto;
+  margin-bottom: 20rpx;
+}
+
+.footer {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  background: #f5f5f5;
+  display: flex;
+}
+
+.footer .foot-item {
+  float: left;
+  font-size: 24rpx;
+  text-align: center;
+  padding: 8rpx 0;
+  flex: 1;
+}
+
+.visibility {
+  width: 100%;
+  height: 110rpx;
+}
+
+.icon-ball {
+  background: url(https://coding.it919.cn/static/images/ball.png) center
+    no-repeat;
+}
+
+.active .icon-ball-active {
+  background: url(https://coding.it919.cn/static/images/ball-active.png) center
+    no-repeat;
+}
+
+.icon-news {
+  background: url(https://coding.it919.cn/static/images/news.png) center
+    no-repeat;
+}
+
+.active .icon-news-active {
+  background: url(https://coding.it919.cn/static/images/news-active.png) center
+    no-repeat;
+}
+
+.icon-rank {
+  background: url(https://coding.it919.cn/static/images/rank.png) center
+    no-repeat;
+}
+
+.active .icon-rank-active {
+  background: url(https://coding.it919.cn/static/images/rank-active.png) center
+    no-repeat;
+}
+
+.footer .active {
+  color: #00aa98;
+}
+
+.icon-about {
+  background: url(https://coding.it919.cn/static/images/about.png) center
+    no-repeat;
+}
+
+.footer .icon {
+  padding: 25rpx;
+  background-size: 40rpx 40rpx !important;
+}
+
+footer navigator:active,
+footer navigator:kink {
+  background: #f5f5f5;
+}
+</style>

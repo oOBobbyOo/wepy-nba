@@ -1,0 +1,11 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var toFixed = function toFixed(param) {
+  return parseFloat(param * 100).toFixed(1) + '%';
+};
+
+exports.toFixed = toFixed;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRvRml4ZWQuanMiXSwibmFtZXMiOlsidG9GaXhlZCIsInBhcnNlRmxvYXQiLCJwYXJhbSJdLCJtYXBwaW5ncyI6Ijs7Ozs7QUFBQSxJQUFNQSxVQUFVLFNBQVZBLE9BQVUsUUFBUztBQUN2QixTQUFPQyxXQUFXQyxRQUFRLEdBQW5CLEVBQXdCRixPQUF4QixDQUFnQyxDQUFoQyxJQUFxQyxHQUE1QztBQUNELENBRkQ7O1FBSVNBLE8sR0FBQUEsTyIsImZpbGUiOiJ0b0ZpeGVkLmpzIiwic291cmNlc0NvbnRlbnQiOlsiY29uc3QgdG9GaXhlZCA9IHBhcmFtID0+IHtcclxuICByZXR1cm4gcGFyc2VGbG9hdChwYXJhbSAqIDEwMCkudG9GaXhlZCgxKSArICclJztcclxufTtcclxuXHJcbmV4cG9ydCB7IHRvRml4ZWQgfTtcclxuIl19

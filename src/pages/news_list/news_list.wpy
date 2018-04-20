@@ -1,0 +1,78 @@
+<template>
+  <view>
+    <block wx:if="{{list.length !=0}}">
+      <view class="news-list" wx:for="{{list}}" wx:for-item="list" wx:key="index">
+          <navigator url="/pages/news_info/news_info?docid={{list.docid}}">
+              <view class='list-img left'>
+                  <image src='{{list.imgsrc}}'></image>
+              </view>
+              <view class='news-info'>
+                  <view class='title'>{{list.title}}</view>
+                  <view class='time-info'>
+                      <view class='date'>{{list.ptime}}
+                          <text class='comment-coount right'>{{list.commentCount}}</text>
+                      </view>
+                  </view>
+              </view>
+          </navigator>
+      </view>
+  </block>
+  <view wx:if="{{list.length==0 && isShow==true}}" class="no-data">
+      <view class='icon-nothing'></view>
+      暂无资讯数据
+  </view>
+</view>
+</template>
+
+<script>
+import wepy from 'wepy';
+import { news_list } from '../../utils/api';
+
+export default class News_list extends wepy.page {
+  config = {
+    navigationBarTitleText: 'NBA资讯'
+  };
+
+  data = {
+    page: 0,
+    isShow: false,
+    list: []
+  };
+
+  methods = {};
+
+  async getNewsList(page) {
+    let that = this;
+    let data = {
+      page: page
+    };
+
+    const res = await news_list(data);
+    // setData
+    that.isShow = true;
+    that.list = that.list.concat(res.data);
+    that.$apply();
+  }
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad() {
+    this.getNewsList(0);
+  }
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom() {
+    let that = this;
+    that.page += 1;
+    console.log(that.page);
+    this.getNewsList(that.page);
+  }
+}
+</script>
+
+<style lang="less">
+@import './news_list.less';
+</style>
+
+

@@ -1,0 +1,103 @@
+<template>
+<view>
+    <view class="swiper-tab">
+        <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" @tap="swichNav">西部排名</view>
+        <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" @tap="swichNav">东部排名</view>
+    </view>
+    <view current="{{currentTab}}" class="swiper-box" bindchange="bindChange">
+        <view class="swiper-item   {{currentTab==0 ? 'active' : ''}}">
+            <view class='t-head  padding-lr-30' wx:if="{{list.west}}">
+                <text>球队</text>
+                <text>胜场</text>
+                <text>负场</text>
+                <text>胜率</text>
+                <text>场均差</text>
+            </view>
+            <view class='t-body'>
+                <view class='team-item' wx:for="{{list.west}}" wx:for-item="item" wx:key="index1">
+                    <navigator url="/pages/team_info/team_info?teamId={{item.teamId}}">
+                        <text id="{{item.teamId}}">{{index+1}}.{{item.name}}</text>
+                        <text>{{item.wins}}</text>
+                        <text>{{item.losses}}</text>
+                        <text>{{item['wining-percentage']}}%</text>
+                        <text>{{item['games-back'] }}</text>
+                    </navigator>
+                </view>
+            </view>
+        </view>
+
+        <view class="swiper-item  {{currentTab==1 ? 'active' : ''}}">
+            <view class='t-head  padding-lr-30'>
+                <text>球队</text>
+                <text>胜场</text>
+                <text>负场</text>
+                <text>胜率</text>
+                <text>场均差</text>
+            </view>
+            <view class='t-body'>
+                <view class='team-item' wx:for="{{list.east}}" wx:for-item="item" wx:key="index2">
+                    <navigator url="/pages/team_info/team_info?teamId={{item.teamId}}">
+                        <text id="{{item.teamId}}">{{index+1}}.{{item.name}}</text>
+                        <text>{{item.wins}}</text>
+                        <text>{{item.losses}}</text>
+                        <text>{{item['wining-percentage']}}%</text>
+                        <text>{{item['games-back'] }}</text>
+                    </navigator>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+</template>
+
+<script>
+import wepy from 'wepy';
+import { team_rank } from '../../utils/api';
+
+export default class Team_rank extends wepy.page {
+  config = {
+    navigationBarTitleText: '球队战绩'
+  };
+
+  data = {
+    list: [],
+    currentTab: 0, // tab切换
+    technical: []
+  };
+
+  methods = {
+    // 滑动切换tab
+    bindChange(e) {
+      let that = this;
+      that.currentTab = e.detail.current;
+    },
+    // 点击tab切换
+    swichNav(e) {
+      let that = this;
+      if (that.currentTab === e.target.dataset.current) {
+        return false;
+      } else {
+        that.currentTab = e.target.dataset.current;
+      }
+    }
+  };
+
+  async getTeamRank() {
+    let that = this;
+    const res = await team_rank({});
+    // setData
+    that.list = res.data;
+    that.$apply();
+  }
+
+  onLoad() {
+    this.getTeamRank();
+  }
+}
+</script>
+
+<style lang="less">
+@import './team_rank.less';
+</style>
+
+
